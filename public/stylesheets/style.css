@@ -1,8 +1,18 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  /*background-color: #ffff99 !important;*/
+  background-image: url(http://www.uglydogbooks.com/wp-content/uploads/2014/04/books.jpg);
+  background-size:     cover; 
+
 }
 
 a {
   color: #00B7FF;
+}
+
+.container {
+    background-color: #ffff99 !important;
+    padding: 20px;
+
 }

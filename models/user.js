@@ -4,8 +4,8 @@ var bcrypt = require('bcrypt-nodejs');
 // var config = require('../config')[process.env.NODE_ENV || 'development'];
 
 var UserSchema = new mongoose.Schema({
-    
-    
+
+
   email: {
       type: String,
       lowercase: true,
@@ -31,11 +31,11 @@ var UserSchema = new mongoose.Schema({
      type: String
    },
   },
-  
+
 
 });
 
-// Save user's hashed password
+// Save user's hashed password  hook
 UserSchema.pre('save', function (next) {
     var user = this;
     if (this.isModified('password') || this.isNew) {

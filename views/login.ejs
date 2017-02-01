@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <!-- <title><%= title %></title> -->
+
+    <%- include('./common/stylesheets')%>
+  </head>
+  <body >
+    <div class="container col-lg-6 col-lg-offset-3">
+      <h3 align="center">Login!</h3>
+      <form>
+        <div class="container container col-lg-6 col-lg-offset-3">
+          <label><b>Username</b></label>
+          <input type="text" id="uemail" class="form-group" placeholder="Enter Useremail" name="uname" required>
+          <label><b>Password</b></label>
+          <input type="password" id="upass" class="form-group" placeholder="Enter Password" name="psw" required>
+          <button type="button" class="btn btn-success" id="sub" >Login</button>
+      </form>
+
+    </div>
+    <%- include('./common/javascript')%>
+    <script>
+  $(document).ready(function() {
+
+    $("#sub").click(function(){
+
+    var data = {
+      email: $('#uemail').val(),
+    password: $('#upass').val()
+
+             }
+            //  console.log(data);
+    $.ajax({
+
+        type:"POST",
+        url:"/login_users",
+        data:data,    // multiple data sent using ajax,send all form contant by a single object
+        success: function (result) {
+            alert(result);
+            window.location.href = "/session/"+result; 
+        }
+      });
+
+    });
+  });
+</script>
+  </body>
+</html>

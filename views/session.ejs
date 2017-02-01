@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+      <%- include('./common/stylesheets')%>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= data %></p>
+    <button type="button" id="sub" name="button">Logout</button>
+    <%- include('./common/javascript')%>
+    <script>
+  $(document).ready(function() {
+     $("#sub").click(function(){
+    $.ajax({
+        type:"GET",
+        url:"/logout",
+        // data:data,    // multiple data sent using ajax,send all form contant by a single object
+        success: function (result) {
+            alert("successfully log out !");
+            window.location.href = "/login/";
+        }
+      });
+
+    });
+  });
+</script>
+  <%- include('./common/javascript')%>
+  </body>
+</html>

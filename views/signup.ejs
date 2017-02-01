@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <title><%= title %></title>
+
+    <%- include('./common/stylesheets')%>
+  </head>
+  <body >
+    <div class="container col-lg-6 col-lg-offset-3">
+      <h3 align="center"><%= title %></h3>
+      <form>
+        <fieldset class="form-group">
+          <label for="exampleInputEmail1">First name</label>
+          <input type="text" class="form-control" id="fname" placeholder="First name">
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="exampleInputEmail1">Last name</label>
+          <input type="text" class="form-control" id="lname" placeholder="Last name">
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter email">
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control" id="pass" placeholder="Password">
+        </fieldset>
+
+        <button type="button" id="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+    </div>
+    <%- include('./common/javascript')%>
+    <script>
+  $(document).ready(function() {
+
+    $("#submit").click(function(){
+
+    var data = {
+      email: $('#email').val(),
+    password: $('#pass').val(),
+    name : {
+      first: $('#fname').val(),
+      last:  $('#lname').val()
+        }
+             }
+    $.ajax({
+
+        type:"POST",
+        url:"/",
+        data:data,    // multiple data sent using ajax,send all form contant by a single object
+        success: function (result) {
+            alert('ok');
+        }
+      });
+
+    });
+  });
+</script>
+  </body>
+</html>
