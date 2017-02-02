@@ -5,24 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <link rel="stylesheet" href="/stylesheets/style.css">
-    <!-- <title><%= title %></title> -->
 
+    <!-- <title><%= title %></title> -->
+    <%- include('./common/javascript')%>
     <%- include('./common/stylesheets')%>
   </head>
   <body >
-    <div class="container col-lg-6 col-lg-offset-3">
-      <h3 align="center">Login!</h3>
+    <div class="container col-lg-4 col-lg-offset-4">
+
+      <h3 align="center"><%= title %></h3>
       <form>
-        <div class="container container col-lg-6 col-lg-offset-3">
-          <label><b>Username</b></label>
-          <input type="text" id="uemail" class="form-group" placeholder="Enter Useremail" name="uname" required>
-          <label><b>Password</b></label>
-          <input type="password" id="upass" class="form-group" placeholder="Enter Password" name="psw" required>
-          <button type="button" class="btn btn-success" id="sub" >Login</button>
+        <div class="container container col-lg-12 ">
+          <label><b>Username:</b></label>
+          <input type="text" id="uemail" class="form-control" placeholder="Enter Useremail" name="uname" required>
+          <label><b>Password:</b></label>
+          <input type="password" id="upass" class="form-control" placeholder="Enter Password" name="psw" required>
+          <hr>
+          <button type="button" class="btn btn-primary" id="sub" >Login</button>
       </form>
 
     </div>
-    <%- include('./common/javascript')%>
+
     <script>
   $(document).ready(function() {
 
@@ -40,8 +43,20 @@
         url:"/login_users",
         data:data,    // multiple data sent using ajax,send all form contant by a single object
         success: function (result) {
-            alert(result);
-            window.location.href = "/session/"+result; 
+            //  alert(result);                     // pnotify
+              new PNotify({
+                title: 'Regular Notice',
+                text: result,
+                icon: 'fa fa-envelope-o',
+                type:'error'
+              });
+            window.location.href = "/session/";
+            new PNotify({
+              title: 'Congratulation',
+              text: 'Loged in',
+              type: 'success'
+            });
+
         }
       });
 

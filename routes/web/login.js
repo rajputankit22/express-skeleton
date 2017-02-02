@@ -16,9 +16,9 @@ module.exports = {
         console.log(data);
       User.findOne({email : data.email}).exec(function(err, result){
         if(err) { return res.json({error : true , reason : err});}
-         console.log(result);
-         if(result === "" && result === null)
-             return res.json("user is not exist!");
+
+         if(result === "" || result === null)
+             return res.send("user is not exist!");
 
         result.comparePassword(data.password, function(err, Match){
           if(Match && !err)
@@ -31,7 +31,13 @@ module.exports = {
             console.log(req.session.logintime);
             // res.render('session', { title: 'Welcome!' , data : req.session.name });
             //  window.location.href = "/session/"
-            res.send(req.session.name);
+            var d = {
+              e : req.session.email,
+              n : req.session.name
+            };
+            // console.log(d);
+            res.json({err : false, data : d});
+
           }
           else
              return res.json("Invalid!");
