@@ -13,13 +13,18 @@ a {
 }
 
 .container {
-    background-color: #93ec93 !important;
+    background-color: #3b5998 !important;
     padding: 20px;
     position: relative;
-    /*color: #FFFFFF;*/
+    color: #FFFFFF;
     opacity: 0.9;
     border-radius: 20px;
     font-size: 120%;
 
 
+}
+hr {
+  border : 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }

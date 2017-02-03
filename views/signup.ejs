@@ -10,7 +10,7 @@
     <%- include('./common/stylesheets')%>
   </head>
   <body >
-    <div class="container col-lg-4 col-lg-offset-4">
+    <div class="container col-lg-6 col-lg-offset-3">
       <h3 align="center"><%= title %></h3>
       <form>
         <fieldset class="form-group">
@@ -29,34 +29,141 @@
           <label for="exampleInputPassword1">Password:</label>
           <input type="password" class="form-control" id="pass" placeholder="Password">
         </fieldset>
+         <div class="" align="center">
+            <button type="button" id="submit" class="btn btn-success ">Signup</button>
+            <button type="button" id="login" class="btn btn-success ">Login</button>
+         </div>
 
-        <button type="button" id="submit" class="btn btn-primary">Submit</button>
       </form>
 
     </div>
     <%- include('./common/javascript')%>
     <script>
+    $(document).ready(function() {
+
+      $("#login").click(function(){
+        window.location.href = 'login'
+
+     });
+   });
+
   $(document).ready(function() {
 
     $("#submit").click(function(){
 
-    var data = {
-      email: $('#email').val(),
-    password: $('#pass').val(),
-    name : {
-      first: $('#fname').val(),
-      last:  $('#lname').val()
-        }
-             }
-    $.ajax({
+        var vfirstname = $('#fname').val();
+        var vlastname = $('#lname').val();
+        var vemail = $('#email').val();
+        var vpassword = $('#pass').val();
 
-        type:"POST",
-        url:"/",
-        data:data,    // multiple data sent using ajax,send all form contant by a single object
-        success: function (result) {
-            alert('ok');
-        }
-      });
+                    if(userid_validationf(vfirstname,5,12))
+                      {
+
+                        if(userid_validationl(vlastname,5,12))
+                         {
+
+                           if(ValidateEmail(vemail))
+                            {
+
+                                if(rollnumber(vpassword))
+                            {
+                              var data = {
+                                email: $('#email').val(),
+                              password: $('#pass').val(),
+                              name : {
+                                first: $('#fname').val(),
+                                last:  $('#lname').val()
+                                  }
+                                       }
+
+
+                              $.ajax({
+
+                                  type:"POST",
+                                  url:"/",
+                                  data:data,    // multiple data sent using ajax,send all form contant by a single object
+                                  success: function (result) {
+                                      alert('ok');
+                                      $('#email').val(null),
+                                      $('#pass').val(null),
+                                      $('#fname').val(null),
+                                      $('#lname').val(null)
+
+                                  }
+                                });
+                             }
+                             }
+                          }
+                    }
+                    return false;
+
+        // Validation for lastname
+                    function userid_validationf(uid,mx,my)
+                    {
+                    var uid_len = uid.length;
+                    if (uid_len == 0 || uid_len >= my || uid_len < mx)
+                    {
+                    alert("first Name should not be empty and length should be between "+mx+" to "+my);
+                    $('#fname').focus();
+                    return false;
+                    }
+                    return true;
+                    }
+
+
+       // Validation for lastname
+                    function userid_validationl(uid,mx,my)
+                    {
+                    var uid_len = uid.length;
+                    if (uid_len == 0 || uid_len >= my || uid_len < mx)
+                    {
+                    alert("last Name should not be empty and length should be between "+mx+" to "+my);
+                    $('#lname').focus();
+                    return false;
+                    }
+                    return true;
+                    }
+
+     // Validation for Email valid
+                    function ValidateEmail(uemail)
+                    {
+                    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                    if(uemail.match(mailformat))
+                    {
+                    return true;
+                    }
+                    else
+                    {
+                    alert("You have entered an invalid email address!");
+                    $('#email').focus();
+                    return false;
+                    }
+                    }
+
+      //Validation for password
+                    function rollnumber(uzip)
+                    {
+                    var numbers = /^[0-9]+$/;
+                    if(uzip.match(numbers))
+                    {
+                    var len=uzip.length;
+                    if(len==5)
+                        return true;
+                    else
+                    {
+                      alert("roll number length should be 5 digit long.");
+                      $('#pass').focus();
+                      return false;
+                    }
+                    }
+                    else
+                    {
+                    alert('roll number should be numeric');
+                    $('#pass').focus();
+                    return false;
+                    }
+                    }
+
 
     });
   });

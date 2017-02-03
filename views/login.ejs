@@ -43,19 +43,27 @@
         url:"/login_users",
         data:data,    // multiple data sent using ajax,send all form contant by a single object
         success: function (result) {
-            //  alert(result);                     // pnotify
+            //  alert(result);
+            console.log(result);
+            if(result.error)
+            {                   // pnotify
               new PNotify({
                 title: 'Regular Notice',
-                text: result,
+                text: result.data,
                 icon: 'fa fa-envelope-o',
                 type:'error'
               });
-            window.location.href = "/session/";
-            new PNotify({
+              $('#uemail').val(null);
+              $('#upass').val(null);
+            }
+            else {
+              new PNotify({
               title: 'Congratulation',
-              text: 'Loged in',
+              text: result.ale,
               type: 'success'
             });
+            window.location.href = "/session/";
+          }
 
         }
       });

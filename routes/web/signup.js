@@ -4,7 +4,7 @@ var User = require('../../models/user');
 
 module.exports = {
       rubbish : function(req, res) {
-            res.render('signup', { title: 'Welcome!' });
+            res.render('signup', { title: '"Just Do It"' });
       },
 
       post : function(req, res) {

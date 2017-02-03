@@ -17,11 +17,11 @@ module.exports = {
       User.findOne({email : data.email}).exec(function(err, result){
         if(err) { return res.json({error : true , reason : err});}
 
-         if(result === "" || result === null)
-             return res.send("user is not exist!");
+         if(result == "" || result == null)
+             return res.json({error : true ,data:"user is not exist!"});
 
-        result.comparePassword(data.password, function(err, Match){
-          if(Match && !err)
+        result.comparePassword(data.password, function(err, isMatch){
+          if(isMatch && !err)
           {
             // return res.json("successfully!");
             req.session.name = result.name.full;
@@ -36,11 +36,11 @@ module.exports = {
               n : req.session.name
             };
             // console.log(d);
-            res.json({err : false, data : d});
+            res.json({err : false, data : d , ale : 'Login successfully'});
 
           }
           else
-             return res.json("Invalid!");
+             return res.json({ale : 'Invalid!'});
         });
 
 
