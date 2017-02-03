@@ -14,7 +14,7 @@ module.exports = {
       }
     }
   },
-  'production': {
+    'production': {
     "secret": "bd17ddffc6694d25834a99ac2708a498",
     // "database": "mongodb://localhost:27017/signupdb",
      "database": "mongodb://user:SumanPramod22mlab@ds139969.mlab.com:39969/signupdb",
