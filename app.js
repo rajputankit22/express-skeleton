@@ -19,17 +19,17 @@ var app = express();
 // For Prod usage (SECURITY)
 // app.use(helmet())
 
-// mailer.extend(app, {
-//   from: config.email.from,
-//   host: config.email.host, // hostname
-//   secureConnection: true, // use SSL
-//   port: config.email.port, // port for secure SMTP
-//   transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
-//   auth: {
-//     user: config.email.auth.user,
-//     pass: config.email.auth.pass
-//   }
-// });
+mailer.extend(app, {
+  from: config.email.from,
+  host: config.email.host, // hostname
+  secureConnection: true, // use SSL
+  port: config.email.port, // port for secure SMTP
+  transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
+  auth: {
+    user: config.email.auth.user,
+    pass: config.email.auth.pass
+  }
+});
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.database);
